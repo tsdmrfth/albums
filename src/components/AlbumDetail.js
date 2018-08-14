@@ -1,30 +1,40 @@
 import React from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, Linking} from 'react-native';
 import Card from './Card'
 import CardSection from './CardSection'
+import Button from './Button'
 
 const AlbumDetail = ({data}) => {
 
-    const {thumbnail_image, title, artist} = data;
+    const {thumbnail_image, title, artist, url} = data;
 
     const {cardSectionStyle, headerSectionStyle, thumbnailStyle, headerTextStyle, imageStyle} = styles;
 
     return (
         <Card>
+
             <CardSection style={cardSectionStyle}>
                 <View>
                     <Image style={thumbnailStyle}
-                           source={{uri: 'https://www.edamam.com/web-img/22c/22c27bdc6b8dc67215c7478cb4e5dc42.jpg'}}/>
+                           source={{uri: thumbnail_image}}/>
                 </View>
                 <View style={headerSectionStyle}>
                     <Text style={headerTextStyle}>{title}</Text>
                     <Text>{artist}</Text>
                 </View>
             </CardSection>
+
             <CardSection>
                 <Image style={imageStyle}
-                       source={{uri: 'https://www.edamam.com/web-img/22c/22c27bdc6b8dc67215c7478cb4e5dc42.jpg'}}/>
+                       source={{uri: thumbnail_image}}/>
             </CardSection>
+
+            <CardSection>
+                <Button whenClicked={() => Linking.openURL(url)}>
+                    Buy Now
+                </Button>
+            </CardSection>
+
         </Card>
     );
 };
